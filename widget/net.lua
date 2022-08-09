@@ -34,7 +34,7 @@ local function factory(args)
     function net.get_devices()
         net.iface = {} -- reset at every call
         helpers.line_callback("ip link", function(line)
-            net.iface[#net.iface + 1] = not string.match(line, "LOOPBACK") and string.match(line, "(%w+): <") or nil
+            net.iface[#net.iface + 1] = not string.match(line, "LOOPBACK") and not string.match(line, "docker") and string.match(line, "(%w+): <") or nil
         end)
     end
 
